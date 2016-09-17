@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :find_article, only: [:show, :edit, :update, :destroy]
-  #before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @articles = Article.all
@@ -16,13 +16,13 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = Article.new
-    #@article = current_user.articles.build
+    #@article = Article.new
+    @article = current_user.articles.build
   end
 
   def create
-    @article = Article.new article_params
-    # @article = current_user.articles.build(article_params)
+    #@article = Article.new article_params
+    @article = current_user.articles.build(article_params)
     if @article.save
       redirect_to @article
     else
